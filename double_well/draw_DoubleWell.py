@@ -13,8 +13,9 @@ size = 20 # font size
 a = 2
 X = 5
 x = np.linspace(-X, X, N)
-U = (abs(x*x - a*a) / a / a)**1.5 * 3
-A = 2
+U = abs(x*x/a/a - 1)**1.5 * 3
+Ee = 2
+Eg = 0.25
 
 
 fig, ax = plt.subplots(figsize = (3.5,3))
@@ -35,15 +36,15 @@ sigma = a*0.8
 x1 = np.linspace(-1.25*X, 1.25*X, N)
 phiL = np.exp(-(x1+a)**2/sigma**2)
 phiR = np.exp(-(x1-a)**2/sigma**2)
-phig = (phiL + phiR)/np.sqrt(2)
-phie = (phiL - phiR)/np.sqrt(2) + A
+phig = (phiL + phiR)/np.sqrt(2) + Eg
+phie = (phiL - phiR)/np.sqrt(2) + Ee
 ax.plot(x1,phie, label=r'$\phi_e(X)$')
 ax.plot(x1,phig, label=r'$\phi_g(X)$')
-ax.annotate('', xy=(0,A/5), xytext=(0,A),
+ax.annotate('', xy=(0,Eg), xytext=(0,Ee),
             arrowprops=dict(arrowstyle='<->'))
-ax.annotate(r'$J$', xy=(0.1,A*.5), fontsize=size)
+ax.annotate(r'$J$', xy=(0.1,(Ee+Eg)/2), fontsize=size)
 
-ax.annotate('', xy=(-a,A/5), xytext=(a,A/5),
+ax.annotate('', xy=(-a,Ee/5), xytext=(a,Ee/5),
             arrowprops=dict(arrowstyle='<->'))
 ax.annotate(r'$a$', xy=(0,0), fontsize=size)
 
